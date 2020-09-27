@@ -3,7 +3,7 @@
 //  Flicker_iOS_search
 //
 //  Created by Suryakant Sharma-Pro on 06/09/20.
-//  Copyright © 2020 Tokopedia. All rights reserved.
+//  Copyright © 2020 Github. All rights reserved.
 //
 
 import Foundation
