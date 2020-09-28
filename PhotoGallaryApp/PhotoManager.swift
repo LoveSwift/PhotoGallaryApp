@@ -23,6 +23,7 @@ struct PhotoManager {
     
     internal mutating func fetchPhotos(session: URLSession = URLSession.shared, text: String, pageCount: Int, callBack: @escaping((Result<Photos, Error>) -> Void)) {
         
+        //TODO: Add Space with URL encoding
         // Removing here spaces
         let keyword = text.removeSpace
         guard keyword.count != 0 else { return }
@@ -31,10 +32,14 @@ struct PhotoManager {
             return
         }
         
-        print(urlPath)
+        let urlRequest = URLRequest(url: urlPath,
+                                    cachePolicy: .returnCacheDataElseLoad,
+                                    timeoutInterval: 60)
+        
+        
         // Cancel earlier data task before start new one
         self.dataTask?.cancel()
-        self.dataTask = session.dataTask(with: urlPath) { data, response, error in
+        self.dataTask = session.dataTask(with: urlRequest) { data, response, error in
             guard let data = data, error == nil else {
                 print("error: \(String(describing: error?.localizedDescription))")
                 callBack(.failure(error!))
